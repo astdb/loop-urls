@@ -1,4 +1,4 @@
 <?php
-  $current_ID = intval($_POST['current_id']);
-  $nextID = $current_ID + 1;
+  $currentID = intval($_POST['current_id']);
+  $nextID = $currentID + 1;
   print "r|" . $nextID;
