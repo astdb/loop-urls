@@ -30,7 +30,7 @@
         } else if( sdata_type === "r" ){
           // success - next-to-go URL sent from backend
           var currentURI = window.location;
-          currentURI_str = "" + currentURI;
+          var currentURI_str = "" + currentURI;
           var nextURI = currentURI_str.replace(currentPID, sdata_data);
           window.location.replace(nextURI);
         }
