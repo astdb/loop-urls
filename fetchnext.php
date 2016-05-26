@@ -1,12 +1,14 @@
 <?php
-  $currentID = $_POST['current_id'];
-  // $currentID = 10;
+  // $currentID = $_POST['current_id'];
+  $currentID = 16;
   // $nextID = $currentID + 1;
   // print "r|" . $nextID;
+  // exit();
+
   if( is_file('conn/pdo_config.inc.php') ) {
 		include_once('conn/pdo_config.inc.php');
 	} else {
-		print "Data object persistence configuration not found: error code 46764567";
+		// print "Data object persistence configuration not found: error code 46764567";
 		exit(1);
 	}
 
@@ -18,37 +20,43 @@
 
      if( $stmt->execute() ) {
        $rowset = $stmt->fetchAll();
-       $rowset_count = count($rowset);
+       $rowset_count = count($rowset)-1;
        // print_r($rowset);
        // die();
        $rowindex = 0;
        // print $rowset_count . "<br />";
-       foreach($rowset as $row){
+
+       //print $rowset_count;
+       // exit();
+
+        $retnext = false;
+       foreach ($rowset as $row) {
          // print $rowindex . " | " . $row['tlu_payload'] . "<br />";
          $thisid = $row['tlu_payload'];
+         print "Rowindex: " . $rowindex . " | Rowset count: " . $rowset_count . " | ThisID: " . $thisid . " | Current ID: " . $currentID . "<br />";
          // die($thisid);
+
+         if ( $retnext ) {
+           $retnext = true;
+           print "r|" . $thisid;
+           exit();
+         }
 
          if ($thisid == $currentID) {
            if($rowindex == ($rowset_count-1)){
              // at last result
+             die("BLAH!");
              print "r|" . $rowset[0]['tlu_payload'];
              exit();
            } else {
-             print "r|" . $thisid;
-             exit();
+             // print "r|" . $thisid;
+             // exit();
+             $retnext = true;
            }
          }
 
         $rowindex++;
        }
-
-      //  while( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-      //     $thisid = intval(trim($row['tlu_payload']));
-       //
-      //      if($currentID == $thisid){
-       //
-      //      }
-      //  }
      } else {
        print "m|Error executing prepared statement: #56765572</b>";
        exit();
