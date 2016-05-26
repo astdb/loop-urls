@@ -10,7 +10,7 @@
   try {
      // retreive user info for this username
      $dbh = $db_pdo->connect();
-     $stmt = $dbh->prepare("SELECT tlu_payload FROM tbl_loop_urls");
+     $stmt = $dbh->prepare("SELECT tlu_payload FROM tbl_loop_urls WHERE tlu_active=1");
 
      if( $stmt->execute() ) {
        $rowset = $stmt->fetchAll();

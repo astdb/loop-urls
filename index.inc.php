@@ -10,7 +10,7 @@
       if($loop) {
         print 'window.onload = function() {
           // getNextURI();
-          timeoutID = window.setTimeout(getNextURI, 4000);
+          timeoutID = window.setTimeout(getNextURI, 2000);
         };';
       }
     ?>
